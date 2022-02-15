@@ -1,11 +1,11 @@
 const express = require("express")
-const adminSchema = require('../../models/admin')
+const AdminSchema = require('../../models/Admin.js')
 var router = express.Router()
 
 router.get('/', (req, res) => {
-    adminSchema.find({}, 'username password email', (error, admin) => {
+    AdminSchema.find({}, 'username  email', (error, admins) => {
         res.send({
-            admin
+            admins
         })
     });
 });

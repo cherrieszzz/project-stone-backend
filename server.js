@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/admin", admin);
 app.use("/api", api);
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Connected to MongoDB
 const URI = 'mongodb+srv://zpyqaq:zpy020923@cluster0.6d1um.mongodb.net/stones-datebase?retryWrites=true&w=majority';
@@ -24,15 +25,6 @@ mongoose.connect(URI, {
     if (err) throw err;
     console.log('Connected to MongoDB!!!')
 });
-
-
-// Include controllers
-fs.readdirSync("controllers").forEach(function (file) {
-    if (file.substr(-3) == ".js") {
-        const route = require("./controllers/" + file)
-        route.controller(app)
-    }
-})
 
 router.get('/', function (req, res) {
     res.json({ message: 'API Initialized!' });
